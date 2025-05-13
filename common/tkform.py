@@ -1,5 +1,5 @@
 import tkinter
-import common.process
+import common.process as common_process
 import os
 dir = os.path.dirname(os.path.abspath(__file__)) + "\\"
 
@@ -7,7 +7,7 @@ separator = "\n###############################################\n\n"
 
 class Mainform() :
     def __init__(self,vector_file,nn_file,max_word_len : int | None = None):
-        self.process = common.process.Process(vector_file,nn_file,max_word_len)
+        self.process = common_process.Process(vector_file,nn_file,max_word_len)
 
         self.window = tkinter.Tk()
         self.leftpanel = tkinter.PanedWindow(master= self.window, width = 70)

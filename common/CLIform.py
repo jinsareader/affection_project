@@ -1,4 +1,4 @@
-import common.process
+import common.process as common_process
 import os
 dir = os.path.dirname(os.path.abspath(__file__)) + "\\"
 
@@ -6,7 +6,7 @@ separator = "###############################################\n"
 
 def activate(vector_file, nn_file, max_word_len : int | None = None) :
 
-    process = common.process.Process(vector_file,nn_file,max_word_len)
+    process = common_process.Process(vector_file,nn_file,max_word_len)
     print(f"NN : {nn_file.split('.')[0]}\n")
     print(separator)
     
