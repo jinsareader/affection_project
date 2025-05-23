@@ -1,6 +1,5 @@
 import common.custom as custom
-from common.custom_kor import Preprocessor
-from konlpy.tag import Kkma as word_div
+from kiwipiepy import Kiwi
 import pickle
 import numpy
 import onnxruntime
@@ -10,36 +9,33 @@ dir = os.path.dirname(os.path.abspath(__file__)) + "\\"
 
 class Process() :    
     def __init__(self, vector_file, nn_file, max_word_len : int | None = None) :
-        with open(dir+"target.txt", mode = "r", encoding="UTF8") as f:
-            self.targets = f.readlines()
-            for i in range(len(self.targets)) :
-                self.targets[i] = self.targets[i].strip()
+        self.targets = ['공포','놀람','분노','슬픔','중립','행복','혐오']
         with open(dir+vector_file, mode = "rb") as f :
             self.vector_dict = pickle.load(f)
         self.F = onnxruntime.InferenceSession(dir+nn_file, providers=["CPUExecutionProvider"])
-        self.preprocessor = Preprocessor()
+        self.kiwi = Kiwi()
         self.max_word_len = max_word_len
-        word_div().morphs("더미")
+        self.kiwi.tokenize('더미')
 
     def query_preprocess(self, s : str) :
         unk_list = []
+        word_list = []
         s = custom.text_preprocess_kor(s, True, True)
         try :
-            word_list = self.preprocessor.process(s, 3)
+            temp = self.kiwi.tokenize(s)
+            for w in temp :
+                word_list.append(w.form)
         except Exception as e :
             word_list = ["<unk>"]
             unk_list.append(str(e))
         vector_list = custom.word_vectorize(word_list, self.vector_dict, self.max_word_len)
-        for w in word_list :
-            if w not in self.vector_dict :
-                unk_list.append(w)
+        unk_list = custom.get_unk_words(word_list, self.vector_dict)
         return vector_list, unk_list
     
     def cal(self, vector) :
-        vector = numpy.array(vector).astype(numpy.float32)
+        vector = numpy.array(vector).astype(numpy.int64)
 
-        if vector.ndim == 2 :
-            vector = numpy.expand_dims(vector, 0)
+        vector = numpy.expand_dims(vector, 0)
 
         input = {self.F.get_inputs()[0].name : vector}
         output = self.F.run(None, input)
