@@ -1,15 +1,12 @@
 # korean mood AI
-VER 0.2
+VER 0.2.1
 
 # github link
 https://github.com/jinsareader/affection_project
 
 
-# recent update
-- Merge word vector into Neural Networks files(*.onnx)
-- Change word vector
-- Tweak Neural Networks Structures
-- Change text preprocessing module to kiwi. now konlpy and java are not needed. Install kiwipiepy instead. 
+# recent update (0.2.1)
+- Tweak Neural Networks again.
 
 
 # vector url
@@ -42,6 +39,12 @@ _LSTM : program that operating with LSTM NN
 _transformer : program that operating with transformer NN
 
 
+
+# Update 0.2
+- Merge word vector into Neural Networks files(*.onnx)
+- Change word vector
+- Tweak Neural Networks Structures
+- Change text preprocessing module to kiwi. Now konlpy and java are not needed. Install kiwipiepy instead. 
 
 # Update 0.1
 - AI now can recognize end marks (! ? .)
