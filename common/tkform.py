@@ -1,5 +1,5 @@
 import tkinter
-import common.process as common_process
+import process as common_process
 import os
 dir = os.path.dirname(os.path.abspath(__file__)) + "\\"
 
@@ -19,6 +19,7 @@ class Mainform() :
 
         self.entry = tkinter.Entry(master= self.leftpanel, width = 50, )
         self.entry.grid(row=0, column=0)
+        self.entry.bind("<Return>", self.enter_query)
         self.button = tkinter.Button(master= self.leftpanel, width = 20, text="입력")
         self.button.config(command = self.enter_query)
         self.button.grid(row=0, column=1)
@@ -35,7 +36,7 @@ class Mainform() :
 
         self.window.mainloop()
 
-    def enter_query(self) :
+    def enter_query(self, key = None) :
         self.button.config(command = None)
 
         end = tkinter.END

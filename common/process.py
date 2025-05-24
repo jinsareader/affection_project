@@ -1,4 +1,4 @@
-import common.custom as custom
+import custom as custom
 from kiwipiepy import Kiwi
 import pickle
 import numpy
@@ -20,7 +20,7 @@ class Process() :
     def query_preprocess(self, s : str) :
         unk_list = []
         word_list = []
-        s = custom.text_preprocess_kor(s, True, True)
+        s = custom.text_preprocess_kor(s, end_mark=True, chosung=False)
         try :
             temp = self.kiwi.tokenize(s)
             for w in temp :

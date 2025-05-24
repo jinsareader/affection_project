@@ -5,8 +5,9 @@ VER 0.2.1
 https://github.com/jinsareader/affection_project
 
 
-# recent update (0.2.1)
-- Tweak Neural Networks again.
+# recent update (0.2.2)
+- In tkform programs, when entry is focused, pressing 'enter key' activates the 'enter button'.
+- Some codes are tweaked.
 
 
 # vector url
@@ -39,6 +40,9 @@ _LSTM : program that operating with LSTM NN
 _transformer : program that operating with transformer NN
 
 
+
+# Update 0.2.1
+- Tweak Neural Networks again.
 
 # Update 0.2
 - Merge word vector into Neural Networks files(*.onnx)
